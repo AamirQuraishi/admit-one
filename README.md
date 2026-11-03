@@ -2,7 +2,7 @@
 
 A responsive event management website for campus events. Browse upcoming events, search and filter them, read the details and register for a ticket. Built with plain HTML5, CSS3 and JavaScript. No framework and no build step.
 
-**Live site:** [aamirquraishi.github.io/k-explore](https://aamirquraishi.github.io/k-explore/)
+**Live site:** [aamirquraishi.github.io/admit-one](https://aamirquraishi.github.io/admit-one/)
 
 ## Design idea: a risograph print shop
 
