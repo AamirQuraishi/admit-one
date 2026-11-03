@@ -222,13 +222,18 @@
     $('#heroCount').textContent = `${EVENTS.length} events in the next ${Math.max(...EVENTS.map((e) => e.days))} days. All free for students.`;
 
     const hero = $('.hero'), t = $('.riso');
+    /* Follow the mouse only. Touch screens use the CSS drift animation instead, because
+       a finger leaves no pointer behind and the plates would freeze mid-slip. */
     hero.addEventListener('pointermove', (ev) => {
+      if (ev.pointerType !== 'mouse') return;
       const b = hero.getBoundingClientRect();
-      const px = (ev.clientX - b.left) / b.width - 0.5, py = (ev.clientY - b.top) / b.height - 0.5;
-      t.style.setProperty('--dx', `${(px * 34).toFixed(1)}px`);
-      t.style.setProperty('--dy', `${(py * 22).toFixed(1)}px`);
+      t.style.setProperty('--px', ((ev.clientX - b.left) / b.width - 0.5).toFixed(3));
+      t.style.setProperty('--py', ((ev.clientY - b.top) / b.height - 0.5).toFixed(3));
     });
-    hero.addEventListener('pointerleave', () => { t.style.removeProperty('--dx'); t.style.removeProperty('--dy'); });
+    hero.addEventListener('pointerleave', (ev) => {
+      if (ev.pointerType !== 'mouse') return;
+      t.style.removeProperty('--px'); t.style.removeProperty('--py');
+    });
   }
 
   /* ---------- toast ---------- */

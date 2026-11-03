@@ -164,8 +164,13 @@ p { margin: 0; }
 .hero__inner { position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; }
 
 /* misregistered print: real text in blue, pink and yellow plates drift behind the pointer */
+@property --px { syntax: '<number>'; inherits: true; initial-value: 0; }
+@property --py { syntax: '<number>'; inherits: true; initial-value: 0; }
 .riso {
-  --dx: 7px; --dy: 5px;
+  /* --px / --py run from -.5 to .5. A mouse sets them; touch screens get the drift below.
+     Offsets are in em so the print slip scales with the type instead of swamping it on phones. */
+  --dx: calc(var(--px) * .22em + .04em);
+  --dy: calc(var(--py) * .14em + .03em);
   position: relative; isolation: isolate;
   font-size: clamp(3.4rem, 13.5vw, 12rem);
   line-height: .86; letter-spacing: -.005em;
@@ -183,8 +188,17 @@ p { margin: 0; }
 }
 .riso::before { color: var(--pink); transform: translate(var(--dx), var(--dy)); animation: plate-a 1.1s cubic-bezier(.16, 1, .3, 1) both; }
 .riso::after  { color: var(--yellow); mix-blend-mode: normal; z-index: -1; transform: translate(calc(var(--dx) * -1.15), calc(var(--dy) * -1.15)); animation: plate-b 1.1s cubic-bezier(.16, 1, .3, 1) both; }
-@keyframes plate-a { from { transform: translate(90px, -40px); opacity: 0; } 30% { opacity: 1; } }
-@keyframes plate-b { from { transform: translate(-90px, 50px); opacity: 0; } 30% { opacity: 1; } }
+@keyframes plate-a { from { transform: translate(.45em, -.2em); opacity: 0; } 30% { opacity: 1; } }
+@keyframes plate-b { from { transform: translate(-.45em, .26em); opacity: 0; } 30% { opacity: 1; } }
+
+/* no pointer to follow on touch screens, so the plates drift slowly on their own */
+@media (hover: none), (pointer: coarse) {
+  .riso { animation: plate-drift 9s ease-in-out infinite; }
+}
+@keyframes plate-drift {
+  0%, 100% { --px: -.35; --py: -.25; }
+  50% { --px: .45; --py: .3; }
+}
 
 .hero__row { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2.5rem; }
 .hero__copy { max-width: 34rem; }
@@ -464,7 +478,7 @@ dialog::backdrop { background: rgba(14, 12, 41, .72); backdrop-filter: blur(3px)
 .toast.is-on { transform: translate(-50%, 0); }
 
 @media (max-width: 560px) {
-  .riso { font-size: clamp(2.8rem, 12.6vw, 5rem); }
+  .riso { font-size: clamp(2.8rem, 16vw, 6rem); }
   .facts { grid-template-columns: 1fr; }
   .hero__sun { opacity: .6; }
 }
