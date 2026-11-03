@@ -2,6 +2,17 @@
 
 A responsive event management website for campus events. Browse upcoming events, search and filter them, read the details and register for a ticket. Built with plain HTML5, CSS3 and JavaScript. No framework and no build step.
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="screenshots/hero1.png">
+  <img alt="Admit One home page" src="screenshots/hero2.png">
+</picture>
+
+| Events | Details | Ticket |
+| --- | --- | --- |
+| ![Events](screenshots/events.png) | ![Details](screenshots/detail.png) | ![Ticket](screenshots/ticket.png) |
+
+<img src="screenshots/mobile.png" alt="Admit One on a phone" width="300">
+
 **Live site:** [aamirquraishi.github.io/admit-one](https://aamirquraishi.github.io/admit-one/)
 
 ## Design idea: a risograph print shop
