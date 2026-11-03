@@ -1,4 +1,4 @@
-# K Explore
+# Admit One
 
 A responsive event management website for campus events. Browse upcoming events, search and filter them, read the details and register for a ticket. Built with plain HTML5, CSS3 and JavaScript. No framework and no build step.
 
@@ -6,7 +6,7 @@ A responsive event management website for campus events. Browse upcoming events,
 
 ## Design idea: a risograph print shop
 
-Most event sites look the same: a gradient hero, rounded cards and a soft shadow. K Explore borrows from risograph posters instead, the cheap two-ink prints you see on gig flyers and student zines.
+Most event sites look the same: a gradient hero, rounded cards and a soft shadow. Admit One borrows from risograph posters instead, the cheap two-ink prints you see on gig flyers and student zines.
 
 - **Misregistered hero.** The headline is printed in three inks. Pink and yellow plates sit slightly off the blue one, so they overprint into new colours. On load the plates slide into place, and afterwards they drift with your pointer.
 - **Tickets, not cards.** Every event is a ticket with a torn stub, notched edges and a seat meter that fills as people register.

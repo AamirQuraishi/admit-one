@@ -1,5 +1,5 @@
 /*
-  K Explore – demo event data.
+  Admit One – demo event data.
   `days` is an offset from today, so the site always shows upcoming events
   no matter when it is opened. `taken` is how many seats were already booked
   before the visitor registers; registrations made in the browser are added on top.

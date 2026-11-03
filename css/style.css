@@ -1,5 +1,5 @@
 /* ==========================================================
-   K Explore – styles
+   Admit One – styles
    Concept: a risograph print shop. Flat inks, overprint,
    misregistration, paper grain, tickets with torn stubs.
    ========================================================== */
@@ -141,10 +141,19 @@ p { margin: 0; }
 .nav__links a { text-decoration: none; padding: .5rem 0; background: linear-gradient(var(--pink), var(--pink)) 0 100% / 0 3px no-repeat; transition: background-size .25s; }
 .nav__links a:hover { background-size: 100% 3px; }
 .nav__actions { display: flex; align-items: center; gap: .75rem; }
+.logo__word, .nav .btn { white-space: nowrap; }
 @media (max-width: 720px) {
   .nav__links { display: none; }
   .nav__actions { margin-left: auto; }
   .logo__word { font-size: 1.2rem; }
+}
+@media (max-width: 480px) {
+  .nav { gap: .5rem; }
+  .nav__actions { gap: .5rem; }
+  .logo { gap: .45rem; }
+  .logo__mark { width: 36px; height: 36px; }
+  .logo__word { font-size: 1.1rem; }
+  .nav .btn--small { padding: .5rem .8rem; font-size: .95rem; }
 }
 
 /* ---------- hero ---------- */
@@ -158,8 +167,8 @@ p { margin: 0; }
 .riso {
   --dx: 7px; --dy: 5px;
   position: relative; isolation: isolate;
-  font-size: clamp(3.4rem, 13.5vw, 12.5rem);
-  line-height: .84; letter-spacing: -.035em;
+  font-size: clamp(3.4rem, 13.5vw, 12rem);
+  line-height: .86; letter-spacing: -.005em;
   font-variation-settings: "wdth" 75;
   color: var(--hero-ink);
   hyphens: manual;
@@ -173,7 +182,7 @@ p { margin: 0; }
   pointer-events: none;
 }
 .riso::before { color: var(--pink); transform: translate(var(--dx), var(--dy)); animation: plate-a 1.1s cubic-bezier(.16, 1, .3, 1) both; }
-.riso::after  { color: var(--yellow); mix-blend-mode: normal; z-index: -1; transform: translate(calc(var(--dx) * -1.6), calc(var(--dy) * -1.6)); animation: plate-b 1.1s cubic-bezier(.16, 1, .3, 1) both; }
+.riso::after  { color: var(--yellow); mix-blend-mode: normal; z-index: -1; transform: translate(calc(var(--dx) * -1.15), calc(var(--dy) * -1.15)); animation: plate-b 1.1s cubic-bezier(.16, 1, .3, 1) both; }
 @keyframes plate-a { from { transform: translate(90px, -40px); opacity: 0; } 30% { opacity: 1; } }
 @keyframes plate-b { from { transform: translate(-90px, 50px); opacity: 0; } 30% { opacity: 1; } }
 
@@ -183,16 +192,21 @@ p { margin: 0; }
 .hero__cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
 .hero__count { margin-top: 1.25rem; color: var(--ink-soft); font-size: .95rem; }
 
+/* halftone sun: the dots swell and shrink while the whole disc turns slowly,
+   so the clear patch in its middle circles round like light moving across it */
+@property --dot { syntax: '<length>'; inherits: false; initial-value: 2.2px; }
 .hero__sun {
+  --dot: 2.2px;
   position: absolute; z-index: 1; right: -12vw; top: -14vw;
   width: min(62vw, 760px); aspect-ratio: 1; border-radius: 50%;
-  background:
-    radial-gradient(circle at center, var(--orange) 0 2.2px, transparent 2.6px) 0 0 / 14px 14px,
-    transparent;
+  background: radial-gradient(circle at center, var(--orange) 0 var(--dot), transparent calc(var(--dot) + .4px)) 0 0 / 14px 14px;
   -webkit-mask-image: radial-gradient(circle at 35% 65%, transparent 22%, #000 70%);
           mask-image: radial-gradient(circle at 35% 65%, transparent 22%, #000 70%);
   opacity: .9;
+  animation: sun-turn 90s linear infinite, sun-swell 6s ease-in-out infinite alternate;
 }
+@keyframes sun-turn { to { transform: rotate(360deg); } }
+@keyframes sun-swell { from { --dot: 1.1px; } to { --dot: 4.2px; } }
 
 .sticker {
   position: relative; display: flex; flex-direction: column; gap: .35rem;
@@ -336,7 +350,7 @@ p { margin: 0; }
 /* ---------- footer ---------- */
 .foot { margin-top: clamp(5rem, 10vw, 8rem); padding: 0 var(--gutter) 2rem; overflow: hidden; }
 .foot__big {
-  font: 800 clamp(5rem, 24vw, 22rem)/1 var(--f-display); font-variation-settings: "wdth" 75; letter-spacing: -.04em;
+  font: 800 clamp(4rem, 18vw, 19rem)/1 var(--f-display); font-variation-settings: "wdth" 75; letter-spacing: -.04em;
   text-align: center; white-space: nowrap; overflow: hidden;
   color: transparent; -webkit-text-stroke: var(--bw) var(--ink);
   margin-bottom: 1.5rem; padding-bottom: .05em;
@@ -450,7 +464,7 @@ dialog::backdrop { background: rgba(14, 12, 41, .72); backdrop-filter: blur(3px)
 .toast.is-on { transform: translate(-50%, 0); }
 
 @media (max-width: 560px) {
-  .riso { font-size: clamp(3.2rem, 17vw, 5rem); }
+  .riso { font-size: clamp(2.8rem, 12.6vw, 5rem); }
   .facts { grid-template-columns: 1fr; }
   .hero__sun { opacity: .6; }
 }

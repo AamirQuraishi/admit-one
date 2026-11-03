@@ -1,4 +1,4 @@
-/* K Explore – application logic (vanilla JS, no build step) */
+/* Admit One – application logic (vanilla JS, no build step) */
 (function () {
   'use strict';
 
@@ -30,7 +30,7 @@
     return Object.assign({}, e, { start });
   });
   const byId = (id) => EVENTS.find((e) => e.id === id);
-  let regs = storage.get('kx.regs', []);
+  let regs = storage.get('ao.regs', []);
 
   const seatsLeft = (e) => Math.max(0, e.capacity - e.taken - regs.filter((r) => r.eventId === e.id).length);
   const fillPct = (e) => Math.min(100, Math.round(((e.capacity - seatsLeft(e)) / e.capacity) * 100));
@@ -438,14 +438,14 @@
         f.email.focus(); return;
       }
       const reg = {
-        ticketId: 'KX-' + Math.random().toString(36).slice(2, 7).toUpperCase(),
+        ticketId: 'AO-' +Math.random().toString(36).slice(2, 7).toUpperCase(),
         eventId: current.id,
         name: f.name.value.trim().replace(/\s+/g, ' '),
         email,
         phone: f.phone.value.trim(),
         at: Date.now()
       };
-      regs.push(reg); storage.set('kx.regs', regs);
+      regs.push(reg); storage.set('ao.regs', regs);
       draft = { name: '', email: '', phone: '', id: false };
       $('#ticketCount').textContent = regs.length;
       renderDialog('done', reg);
@@ -486,7 +486,7 @@
         return;
       }
       regs = regs.filter((r) => r.ticketId !== c.dataset.cancel);
-      storage.set('kx.regs', regs);
+      storage.set('ao.regs', regs);
       renderSheet(); refreshAll(); toast('Ticket cancelled. Your seat is back in the pool.');
     }
   });
@@ -519,7 +519,7 @@
   }
   themeBtn.addEventListener('click', () => {
     const t = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    applyTheme(t); storage.set('kx.theme', t);
+    applyTheme(t); storage.set('ao.theme', t);
   });
 
   /* ---------- boot ---------- */
